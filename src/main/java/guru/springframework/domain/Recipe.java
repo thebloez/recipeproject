@@ -20,8 +20,9 @@ public class Recipe {
     private String source;
     private String url;
     private String directions;
-    //todo add
-    //private Difficulty difficulty;
+
+    @Enumerated(EnumType.STRING)
+    private Difficulty difficulty;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients;
@@ -35,12 +36,26 @@ public class Recipe {
     @OneToOne
     private UnitOfMeasure unitOfMeasure;
 
+    @ManyToMany
+    @JoinTable(name = "recipe_category"
+            , joinColumns = @JoinColumn(name = "recipe_id")
+            , inverseJoinColumns = @JoinColumn(name = "category_id"))
+    Set<Category> categories;
+
     public UnitOfMeasure getUnitOfMeasure() {
         return unitOfMeasure;
     }
 
     public void setUnitOfMeasure(UnitOfMeasure unitOfMeasure) {
         this.unitOfMeasure = unitOfMeasure;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
     }
 
     public Long getId() {
@@ -129,5 +144,13 @@ public class Recipe {
 
     public void setIngredients(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }

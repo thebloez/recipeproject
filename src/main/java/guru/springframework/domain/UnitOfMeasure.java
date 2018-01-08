@@ -1,7 +1,6 @@
 package guru.springframework.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 /**
  * Created by thebloez on 08/01/18.
@@ -9,24 +8,24 @@ import javax.persistence.OneToOne;
 @Entity
 public class UnitOfMeasure {
 
-    private String uom;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String desc;
 
-    @OneToOne
-    private Ingredient ingredient;
-
-    public Ingredient getIngredient() {
-        return ingredient;
+    public Long getId() {
+        return id;
     }
 
-    public void setIngredient(Ingredient ingredient) {
-        this.ingredient = ingredient;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getUom() {
-        return uom;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setUom(String uom) {
-        this.uom = uom;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 }

@@ -11,5 +11,4 @@ public interface RecipeRepos extends JpaRepository<Recipe, Integer> {
 
     @Override
     List<Recipe> findAll();
-
 }
